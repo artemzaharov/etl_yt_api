@@ -1,10 +1,13 @@
 # YouTube API – key from .env (same as video_statistic.py)
 # Create .env in project root with: YOUTUBE_KEY=your_key_here
 
+@playlistId = UUYO_jab_esuFRV4b17AJtAw
+
+# get_video_ids(playlist_id) – playlistItems, one page
 GET https://youtube.googleapis.com/youtube/v3/playlistItems
 ?part=contentDetails
-&maxResults=10
-&playlistId=UUYO_jab_esuFRV4b17AJtAw
+&maxResults=50
+&playlistId={{playlistId}}
 &key={{$dotenv YOUTUBE_KEY}}
 
 ###
@@ -12,4 +15,14 @@ GET https://youtube.googleapis.com/youtube/v3/playlistItems
 GET https://youtube.googleapis.com/youtube/v3/channels
 ?part=contentDetails
 &forHandle=3blue1brown
+&key={{$dotenv YOUTUBE_KEY}}
+
+###
+# videos – contentDetails, snippet, statistics (comma-separated ids, max 50)
+@videoIds = dQw4w9WgXcQ
+GET https://youtube.googleapis.com/youtube/v3/videos
+?part=contentDetails
+&part=snippet
+&part=statistics
+&id={{videoIds}}
 &key={{$dotenv YOUTUBE_KEY}}
